@@ -17,7 +17,7 @@ In your Mac OS X or Linux console, you should run the following command. **Don't
 
 {% filename %}command-line{% endfilename %}
 ```
-(venv) ~/GoTicket$ django-admin startproject mysite .
+(venv) ~/GoTicket$ django-admin startproject goticket .
 ```
 
 > The period `.` is crucial because it tells the script to install Django in your current directory (for which the period `.` is a short-hand reference).
@@ -94,7 +94,7 @@ LANGUAGE_CODE = 'en-UK'
 
 We'll also need to add a path for static files. (We'll find out all about static files and CSS later in the tutorial.) Go down to the *end* of the file, and just underneath the `STATIC_URL` entry, add a new one called `STATIC_ROOT`:
 
-{% filename %}mysite/settings.py{% endfilename %}
+{% filename %}goticket/settings.py{% endfilename %}
 ```python
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
