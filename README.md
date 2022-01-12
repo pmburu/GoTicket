@@ -23,7 +23,7 @@ In your Mac OS X or Linux console, you should run the following command. **Don't
 > The period `.` is crucial because it tells the script to install Django in your current directory (for which the period `.` is a short-hand reference).
 
 > **Note** When typing the command above, remember that you only type the part which starts by `django-admin`.
-The `(venv) ~/machineName$` part shown here is just example of the prompt that will be inviting your input on your command line.
+The `(venv) ~/GoTicket$` part shown here is just example of the prompt that will be inviting your input on your command line.
 
 <!--endsec-->
 
@@ -38,7 +38,7 @@ On Windows you should run the following command. **(Don't forget to add the peri
 > The period `.` is crucial because it tells the script to install Django in your current directory (for which the period `.` is a short-hand reference).
 
 > **Note** When typing the command above, remember that you only type the part which starts by `django-admin.exe`.
-The `(venv) C:\Users\Name\machineName>` part shown here is just example of the prompt that will be inviting your input on your command line.
+The `(venv) C:\Users\Name\GoTicket>` part shown here is just example of the prompt that will be inviting your input on your command line.
 
 <!--endsec-->
 
@@ -171,7 +171,7 @@ To create a database for our project, let's run the following in the console: `p
 
 {% filename %}command-line{% endfilename %}
 ```
-(myvenv) ~/machineName$ python manage.py migrate
+(myvenv) ~/GoTicket$ python manage.py migrate
 Operations to perform:
   Apply all migrations: auth, admin, contenttypes, sessions
 Running migrations:
