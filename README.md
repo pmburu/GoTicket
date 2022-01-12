@@ -97,7 +97,7 @@ We'll also need to add a path for static files. (We'll find out all about static
 {% filename %}goticket/settings.py{% endfilename %}
 ```python
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'static'
 ```
 
 When `DEBUG` is `True` and `ALLOWED_HOSTS` is empty, the host is validated against `['localhost', '127.0.0.1', '[::1]']`. This won't
@@ -160,7 +160,7 @@ This is already set up in this part of your `goticket/settings.py` file:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 ```
@@ -171,7 +171,7 @@ To create a database for our project, let's run the following in the console: `p
 
 {% filename %}command-line{% endfilename %}
 ```
-(myvenv) ~/GoTicket$ python manage.py migrate
+(venv) ~/GoTicket$ python manage.py migrate
 Operations to perform:
   Apply all migrations: auth, admin, contenttypes, sessions
 Running migrations:
@@ -200,14 +200,14 @@ You need to be in the directory that contains the `manage.py` file (the `GoTicke
 
 {% filename %}command-line{% endfilename %}
 ```
-(myvenv) ~/GoTicket$ python manage.py runserver
+(venv) ~/GoTicket$ python manage.py runserver
 ```
 
 If you are on a Chromebook, use this command instead:
 
 {% filename %}Cloud 9{% endfilename %}
 ```
-(myvenv) ~/GoTicket$ python manage.py runserver 0.0.0.0:8080
+(venv) ~/GoTicket$ python manage.py runserver 0.0.0.0:8080
 ```
 or this one if you are using Glitch:
 
@@ -221,7 +221,7 @@ If you are on Windows and this fails with `UnicodeDecodeError`, use this command
 
 {% filename %}command-line{% endfilename %}
 ```
-(myvenv) ~/GoTicket$ python manage.py runserver 0:8000
+(venv) ~/GoTicket$ python manage.py runserver 0:8000
 ```
 
 
