@@ -254,3 +254,31 @@ Note that a command window can only run one thing at a time, and the command win
 To type additional commands while the web server is running, open a new terminal window and activate your virtualenv -- to review instructions on how to open a second terminal window, see [Introduction to the command line](../intro_to_command_line/README.md). To stop the web server, switch back to the window in which it's running and press CTRL+C - Control and C keys together (on Windows, you might have to press Ctrl+Break).
 
 Ready for the next step? It's time to create some content!
+
+## Creating a new module
+
+You need to be in the directory that contains the `manage.py` file (the `GoTicket` directory). In the console, we can start the web server by running `python manage.py startapp app_name`:
+
+{% filename %}command-line{% endfilename %}
+
+Then you will see a file system like below
+
+```
+GoTicket
+├── manage.py
+├── goticket
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── app_name
+|   ├── migrations
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
+├── venv
+│   └── ...
+└── requirements.txt
+```
