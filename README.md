@@ -27,7 +27,6 @@ The names of some files and directories are very important for Django. You shoul
 
 In your Mac OS X or Linux console, you should run the following command. **Don't forget to add the period (or dot) `.` at the end!**
 
-{% filename %}command-line{% endfilename %}
 ```
 (venv) ~/GoTicket$ django-admin startproject goticket .
 ```
@@ -43,7 +42,6 @@ The `(venv) ~/GoTicket$` part shown here is just example of the prompt that will
 
 On Windows you should run the following command. **(Don't forget to add the period (or dot) `.` at the end)**:
 
-{% filename %}command-line{% endfilename %}
 ```
 (venv) C:\Users\Name\GoTicket> django-admin.exe startproject goticket .
 ```
@@ -98,7 +96,6 @@ A language code consist of the language, e.g. `en` for English or `de` for Germa
 
 If you want a different language, change the language code by changing the following line:
 
-{% filename %}goticket/settings.py{% endfilename %}
 ```python
 LANGUAGE_CODE = 'en-UK'
 ```
@@ -106,7 +103,6 @@ LANGUAGE_CODE = 'en-UK'
 
 We'll also need to add a path for static files. (We'll find out all about static files and CSS later in the tutorial.) Go down to the *end* of the file, and just underneath the `STATIC_URL` entry, add a new one called `STATIC_ROOT`:
 
-{% filename %}goticket/settings.py{% endfilename %}
 ```python
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
@@ -115,7 +111,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 When `DEBUG` is `True` and `ALLOWED_HOSTS` is empty, the host is validated against `['localhost', '127.0.0.1', '[::1]']`. This won't
 match our hostname on PythonAnywhere once we deploy our application so we will change the following setting:
 
-{% filename %}goticket/settings.py{% endfilename %}
 ```python
 ALLOWED_HOSTS = ['127.0.0.1', 'anyotherexternalurl']
 ```
@@ -167,7 +162,6 @@ There's a lot of different database software that can store data for your site. 
 
 This is already set up in this part of your `goticket/settings.py` file:
 
-{% filename %}goticket/settings.py{% endfilename %}
 ```python
 DATABASES = {
     'default': {
@@ -181,7 +175,6 @@ Django migrations are sensitive files that can be broken easily with data integr
 
 To create a database for our project, let's run the following in the console: `python manage.py migrate` (we need to be in the `goticket` directory that contains the `manage.py` file). If that goes well, you should see something like this:
 
-{% filename %}command-line{% endfilename %}
 ```
 (venv) ~/GoTicket$ python manage.py migrate
 Operations to perform:
@@ -210,20 +203,17 @@ And we're done! Time to start the web server and see if our website is working!
 
 You need to be in the directory that contains the `manage.py` file (the `GoTicket` directory). In the console, we can start the web server by running `python manage.py runserver`:
 
-{% filename %}command-line{% endfilename %}
 ```
 (venv) ~/GoTicket$ python manage.py runserver
 ```
 
 If you are on a Chromebook, use this command instead:
 
-{% filename %}Cloud 9{% endfilename %}
 ```
 (venv) ~/GoTicket$ python manage.py runserver 0.0.0.0:8080
 ```
 or this one if you are using Glitch:
 
-{% filename %}Glitch.com terminal{% endfilename %}
 ```
 $ refresh
 
@@ -231,7 +221,6 @@ $ refresh
 
 If you are on Windows and this fails with `UnicodeDecodeError`, use this command instead:
 
-{% filename %}command-line{% endfilename %}
 ```
 (venv) ~/GoTicket$ python manage.py runserver 0:8000
 ```
@@ -239,14 +228,12 @@ If you are on Windows and this fails with `UnicodeDecodeError`, use this command
 
 Now you need to check that your website is running. Open your browser (Firefox, Chrome, Safari, Internet Explorer or whatever you use) and enter this address:
 
-{% filename %}browser{% endfilename %}
 ```
 http://127.0.0.1:8000/
 ```
 
 If you're using a Chromebook and Cloud9, instead click the URL in the pop-up window that should have appeared in the upper right corner of the command window where the web server is running. The URL will look something like:
 
-{% filename %}browser{% endfilename %}
 ```
 https://<a bunch of letters and numbers>.vfs.cloud9.us-west-2.amazonaws.com
 ```
@@ -271,7 +258,6 @@ Ready for the next step? It's time to create some content!
 
 You need to be in the directory that contains the `manage.py` file (the `GoTicket` directory). In the console, we can start the web server by running `python manage.py startapp app_name`:
 
-{% filename %}command-line{% endfilename %}
 
 Then you will see a file system like below
 
