@@ -1,5 +1,17 @@
 # GoTicket!
 
+> If you just want to run the project, then run the following
+and thats all. Note the `python manage.py runserver` assumes that your Python3 is set in your system PATH as the default path to run when python is called. Otheriwse use `python3 manage.py runserver`
+
+```
+~/GoTicket$ git clone https://github.com/pmburu/GoTicket.git
+~/GoTicket$ cd GoTicket
+~/GoTicket$ virtualenv venv
+~/GoTicket$ source venv/bin/activate
+(venv) ~/GoTicket$ pip install -r requirements.txt
+(venv) ~/GoTicket$ python manage.py runserver
+```
+
 > Part of this README file is adapted from (https://github.com/DjangoGirls/tutorial/edit/master/en/django_start_project).
 
 We're going to create a Ticketing project!
