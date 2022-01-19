@@ -74,6 +74,55 @@ class Customer(User):
     class Meta:
         proxy = True
 
+class Tickets_sold(models.Model):
+    
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	total = models.IntegerField()
+
+class Event(models.Model):
+
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name = models.CharField(max_length=200)
+	description = models.TextField(max_length=4000)
+	location = models.CharField(max_length=50)
+	cover_image = models.CharField(max_length=200)
+	background_image = models.CharField(max_length=200)
+	time = models.DateTimeField()
+	user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+	tickets_sold = models.IntegerField()
+
+class Ticket_type(models.Model):
+
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name = models.CharField(max_length=200)
+	price = models.IntegerField()
+	event_id = models.ForeignKey(Event,on_delete=models.CASCADE)
+
+class Ticket(models.Model):
+
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	event_id = models.ForeignKey(Event,on_delete=models.CASCADE)
+	ticket_type_id = models.ForeignKey(Ticket_type,on_delete=models.CASCADE)
+
+class Comments(models.Model):
+    
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	comment = models.TextField(max_length=4000)
+	created_at = models.DateTimeField()
+	score = models.IntegerField(max_length=5)
+	user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+	event_id = models.ForeignKey(Ticket,on_delete=models.CASCADE)
+
+class Favorites(models.Model):
+
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+	event_id = models.ForeignKey(Ticket,on_delete=models.CASCADE)
+
+
+
+
+
 '''
 More about proxy models can be found here:
 1. https://bit.ly/3Gvp7nw
