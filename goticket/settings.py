@@ -226,3 +226,11 @@ STAR_RATINGS_OBJECT_ID_PATTERN = '[a-z0-9]{32}'
 Email backend settings
 '''
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'your email address@gmail.com'
+# EMAIL_HOST_PASSWORD = 'gmail API Key (password)'
