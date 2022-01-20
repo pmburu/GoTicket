@@ -87,7 +87,6 @@ It would be nice to have the correct time on our website. Go to [Wikipedia's lis
 
 In `settings.py`, find the line that contains `TIME_ZONE` and modify it to choose your own timezone.  For example:
 
-{% filename %}goticket/settings.py{% endfilename %}
 ```python
 TIME_ZONE = 'Europe/Berlin'
 ```
@@ -126,7 +125,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'anyotherexternalurl']
 >   * First, we are going to create a random secret key.
 >     Open the Glitch terminal again, and type the following command:
 >
->     {% filename %}command-line{% endfilename %}
+>    
 >     ```bash
 >     python -c 'from django.core.management.utils import get_random_secret_key; \
 >           print(get_random_secret_key())'
@@ -136,20 +135,20 @@ ALLOWED_HOSTS = ['127.0.0.1', 'anyotherexternalurl']
 >   
 >   * Create a file `.env` at the root of your project and add the following property in it:
 >
->     {% filename %}.env{% endfilename %}
+>    
 >     ```bash
 >     # Here, inside the single quotes, you can cut and paste the random key generated above
 >     SECRET='3!0k#7ds5mp^-x$lqs2%le6v97h#@xopab&oj5y7d=hxe511jl'
 >     ```
 >   * Then update the Django settings file to inject this secret value and set the Django web site name:
 >
->     {% filename %}goticket/settings.py{% endfilename %}
+>  
 >     ```python
 >     SECRET_KEY = os.getenv('SECRET')
 >     ```
 >   * And a little further down in the same file, we inject the name of your new Glitch website:
 >
->     {% filename %}goticket/settings.py{% endfilename %}
+>    
 >     ```python
 >     ALLOWED_HOSTS = [os.getenv('PROJECT_DOMAIN') + ".glitch.me"]
 >     ```
