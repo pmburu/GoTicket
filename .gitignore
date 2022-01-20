@@ -130,3 +130,6 @@ dmypy.json
 
 # MacOS
 .DS_Store
+
+# Youcompleteme (Vim)
+.ycm_extra_conf.py

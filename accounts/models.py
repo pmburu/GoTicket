@@ -119,10 +119,6 @@ class Favorites(models.Model):
 	user_id = models.ForeignKey(User,on_delete=models.CASCADE)
 	event_id = models.ForeignKey(Ticket,on_delete=models.CASCADE)
 
-
-
-
-
 '''
 More about proxy models can be found here:
 1. https://bit.ly/3Gvp7nw
