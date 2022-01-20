@@ -20,25 +20,29 @@ For reference see:
 
 class User(AbstractUser):
 
-    # Default user type --> invoked upon registration and updated on choices
-    base_type = UserTypes.CUSTOMER
+	# Default user type --> invoked upon registration and updated on choices
+	base_type = UserTypes.CUSTOMER
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_type = models.CharField(
-        _('User Type'), max_length=13, choices=UserTypes.choices, default=base_type
-    )
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	user_type = models.CharField(
+		_('User Type'), max_length=13, choices=UserTypes.choices, default=base_type
+	)
 
-    def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'username': self.username})
+	def get_absolute_url(self):
+		return reverse('users:detail', kwargs={'username': self.username})
 
-    '''
-    Save changes made to the user 'upon registration' by invoking the
-    parent save method that is shipped with the Django AbstractUser class.
-    '''
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.type = self.base_type
-        return super().save(*args, **kwargs)
+	'''
+	Save changes made to the user 'upon registration' by invoking the
+	parent save method that is shipped with the Django AbstractUser class.
+	'''
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.type = self.base_type
+		return super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = 'User'
+		verbose_name_plural = 'Users'
 
 class EventManagerDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='event_manager_details')
@@ -46,33 +50,51 @@ class EventManagerDetails(models.Model):
 
 class Manager(User):
 
-    base_type = UserTypes.EVENT_MANAGER
-    objects = EventManagerManager()
+	base_type = UserTypes.EVENT_MANAGER
+	objects = EventManagerManager()
 
-    @property
-    def manager_details(self):
-        return self.eventmanagerdetails
+	@property
+	def manager_details(self):
+		return self.eventmanagerdetails
 
-    '''
-    Tell Django database engine to treat this class as a proxy model.
-    No table created, hence number of queries are reduced, perfomance increased
-    '''
+	'''
+	Tell Django database engine to treat this class as a proxy model.
+	No table created, hence number of queries are reduced, perfomance increased
+	'''
 
-    class Meta:
-        proxy = True
+	class Meta:
+		verbose_name = 'Manager'
+		verbose_name_plural = 'Managers'
+		proxy = True
 
 class Customer(User):
 
-    base_type = UserTypes.CUSTOMER
-    objects = CustomerManager()
+	base_type = UserTypes.CUSTOMER
+	objects = CustomerManager()
 
-    '''
-    Tell Django database engine to treat this class as a proxy model.
-    No table created, hence number of queries are reduced, perfomance increased
-    '''
+	class Meta:
+		verbose_name = 'Customer'
+		verbose_name_plural = 'Customers'
+		proxy = True
 
-    class Meta:
-        proxy = True
+class Tickets_sold(models.Model):
+    
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	total = models.IntegerField()
+
+	class Meta:
+		verbose_name = 'Tickets_sold'
+		verbose_name_plural = 'Tickets_sold'
+
+class Favorites(models.Model):
+
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+	event_id = models.ForeignKey('tickets.Ticket',on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name = 'Favorite'
+		verbose_name_plural = 'Favorites'
 
 '''
 More about proxy models can be found here:
