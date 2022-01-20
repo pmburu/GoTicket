@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-bs(2_1i@qql#*1o=#^=v1u08j=no8cqt7cyyb_$nd6ee!6tzw6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -44,10 +44,13 @@ INSTALLED_APPS = [
 
     # Django based applications
     'accounts',
+	'tickets',
+	'events',
 
     # ThirdParty helper applications 'libraries'
     'rest_framework',
-    'djoser'
+    'djoser',
+	'star_ratings',
 ]
 
 '''
@@ -213,3 +216,13 @@ DJOSER = {
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 }
+
+'''
+star-rating settings
+'''
+STAR_RATINGS_OBJECT_ID_PATTERN = '[a-z0-9]{32}'
+
+'''
+Email backend settings
+'''
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
