@@ -37,7 +37,7 @@ class User(AbstractUser):
 	'''
 	def save(self, *args, **kwargs):
 		if not self.id:
-			self.type = self.base_type
+			self.user_type = self.base_type
 		return super().save(*args, **kwargs)
 
 	class Meta:
@@ -78,7 +78,7 @@ class Customer(User):
 		proxy = True
 
 class Tickets_sold(models.Model):
-    
+
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	total = models.IntegerField()
 

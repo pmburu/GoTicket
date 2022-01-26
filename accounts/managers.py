@@ -18,9 +18,9 @@ on the drop down chosen upon user registration
 
 class CustomerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=UserTypes.CUSTOMER)
+        return super().get_queryset(*args, **kwargs).filter(user_type=UserTypes.CUSTOMER)
 
 
 class EventManagerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=UserTypes.EVENT_MANAGER)
+        return super().get_queryset(*args, **kwargs).filter(user_type=UserTypes.EVENT_MANAGER)
