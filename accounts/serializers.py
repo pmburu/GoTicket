@@ -7,3 +7,9 @@ endpoints
 3. Create any necessary endpoints
 4. Unit Test
 '''
+
+from rest_framework import serializers
+
+from events.models import (Event, Comments)
+
+# To do
