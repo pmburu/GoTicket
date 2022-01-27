@@ -15,3 +15,6 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
 
     # permission_classes = blab
+
+def store(request):
+	return render(request, 'store.html', {})
