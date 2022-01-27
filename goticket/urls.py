@@ -18,7 +18,7 @@ from django.urls import path, include
 from accounts import views
 
 urlpatterns = [
-	path('', views.home, name='home'),
+	path('', include('home.urls')),
 	path('about.html', views.about, name='about'),
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
@@ -26,5 +26,5 @@ urlpatterns = [
     path('events/', include('events.urls')),
 	path('login.html', views.login, name='login'),
 	path('sign_up.html', views.signup, name='signup'),
-	path('store.html', views.store, name='store')
+	#	path('store.html', views.store, name='store')
 ]

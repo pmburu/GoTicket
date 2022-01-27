@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
 	'tickets',
 	'events',
+	'home',
 
     # ThirdParty helper applications 'libraries'
     'rest_framework',
