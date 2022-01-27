@@ -24,4 +24,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('events/', include('events.urls')),
+	path('login.html', views.login, name='login'),
+	path('sign_up.html', views.signup, name='signup'),
+	path('store.html', views.store, name='store')
 ]

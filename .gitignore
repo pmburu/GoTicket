@@ -131,5 +131,15 @@ dmypy.json
 # MacOS
 .DS_Store
 
+# static images
+static/assets/
 # Youcompleteme (Vim)
 .ycm_extra_conf.py
+
+# CTags
+tags
+
+# (temp) image assets
+.ico
+.jpg
+.png
