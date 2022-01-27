@@ -24,7 +24,7 @@ class Event(models.Model):
 	cover_image = models.ImageField(upload_to=image_upload)
 	background_image = models.ImageField(upload_to=image_upload)
 	time = models.DateTimeField()
-	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	manager = models.ForeignKey(User,on_delete=models.CASCADE)
 	tickets_sold = models.IntegerField(default=0)
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
