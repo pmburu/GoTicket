@@ -8,6 +8,9 @@ import django.contrib.staticfiles
 def about(request):
 	return render(request, 'about.html', {})
 
+def store(request):
+	return render(request, 'store.html', {})
+
 def login(request):
 	return render(request, 'login.html', {})
 

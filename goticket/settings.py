@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'accounts',
 	'tickets',
 	'events',
-	'home',
+	
 
     # ThirdParty helper applications 'libraries'
     'rest_framework',
@@ -162,6 +162,9 @@ to Django REST Framework authentication strategies tuple
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+	'DEFAULT_PERMISSION_CLASSES':(
+                'rest_framework.permissions.IsAuthenticated',
     ),
 }
 
