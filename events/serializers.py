@@ -31,7 +31,7 @@ class EventSerializer(serializers.ModelSerializer):
             'cover_image',
             'background_image',
             'time',
-            'user',
+            'manager',
             'tickets_sold'
         )
 
@@ -45,6 +45,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'comment',
             'created_at',
             'rating',
-            'user',
+            'manager',
             'event',
         )
