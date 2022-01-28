@@ -11,4 +11,3 @@ from events import views
 router = DefaultRouter()
 router.register('', EventViewSet, basename='event')
 urlpatterns = router.urls
-
