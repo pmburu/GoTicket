@@ -24,7 +24,6 @@ urlpatterns = [
 	path('about.html', views.about, name='about'),
     path('admin/', admin.site.urls),
 	path('auth/', include('djoser.urls')),
-	path('auth/', include('djoser.urls.jwt')),
 	path('events/', include('events.urls')),
     path('store/', views.store , name='store'),
 	path('login.html', views.login, name='login'),
@@ -37,9 +36,7 @@ urlpatterns = [
     path('auth/jwt/refresh',
          jwt_views.TokenRefreshView.as_view(),
          name ='token_refresh'),
-    path('', include('home.urls')),
-	#	path('token/create/', TokenObtainPairView.as_view(), name='token_create'),
-	#path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-	#path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-	#	path('store.html', views.store, name='store')
+	path('auth/jwt/verify/',
+		jwt_views.TokenVerifyView.as_view(),
+		name='token_verify'),
 ]
