@@ -1,15 +1,22 @@
 from typing import Set
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext, gettext_lazy as _
+from django.contrib.auth.forms import (
+    AdminPasswordChangeForm, UserChangeForm, UserCreationForm,
+)
 from .models import (
     User, Manager, Customer,
     Favorites, Tickets_sold
 )
 
-class ManagerAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (None, {'fields' : ('username', 'password')}),
-    )
+from .forms import (
+    CustomerCreationForm, CustomerChangeForm
+)
+
+@admin.register(Manager)
+class ManagerAdmin(UserAdmin):
     search_fields = ('username__startswith',)
     list_display = [
         'username',
@@ -20,14 +27,30 @@ class ManagerAdmin(admin.ModelAdmin):
     ]
     list_per_page = 25
 
-class CustomerAdmin(admin.ModelAdmin):
-    search_fields = ['username']
+@admin.register(Customer)
+class CustomerAdmin(UserAdmin, admin.ModelAdmin):
+    add_form = CustomerCreationForm
+    form = CustomerChangeForm
+    fieldsets = (
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('groups',)}),
+        (_('User Type'), {'fields': ('user_type',)}),
+        (_('Access Credentials'), {'fields': ('username', 'password')}),
+    )
+    readonly_fields = ['user_type']
+    search_fields = ('username__startswith',)
+    list_filters = ()
+    date_hierachy = ('date_joined',)
     list_display = [
         'username',
         'email',
         'last_name',
-        'is_active'
+        'user_type',
+        'is_active',
+        'last_login'
     ]
+
+    list_per_page = 25
 
 
 @admin.register(User)
@@ -63,8 +86,5 @@ class CustomUserAdmin(UserAdmin):
 
         return form
 
-# admin.site.register(User, UserAdmin)
-admin.site.register(Manager, ManagerAdmin)
-# admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Favorites)
 admin.site.register(Tickets_sold)
