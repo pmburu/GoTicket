@@ -46,6 +46,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'comment',
             'created_at',
             'rating',
-            'user',
+            'manager',
             'event',
         )
