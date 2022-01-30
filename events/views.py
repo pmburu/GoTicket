@@ -7,6 +7,7 @@ implementations named something like 'Resources' or 'Controllers'.
 
 
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from .serializers import (EventSerializer, CommentSerializer)
 from .models import (Event, Comments)
 from django.views.decorators.csrf import csrf_exempt
@@ -17,8 +18,6 @@ class EventViewSet(viewsets.ModelViewSet):
 	permission_classes = (IsAuthenticated,)
 	serializer_class = EventSerializer
 	queryset = Event.objects.all()
-
-    # permission_classes = blab
 
 def store(request):
 	return render(request, 'store.html', {})

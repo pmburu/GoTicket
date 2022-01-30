@@ -1,5 +1,5 @@
 import uuid
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -51,7 +51,8 @@ class EventManagerDetails(models.Model):
 class Manager(User):
 
 	base_type = UserTypes.EVENT_MANAGER
-	objects = EventManagerManager()
+	objects = UserManager() # Default user manager
+	active_objects = EventManagerManager() # Custom manager
 
 	@property
 	def manager_details(self):
@@ -70,7 +71,9 @@ class Manager(User):
 class Customer(User):
 
 	base_type = UserTypes.CUSTOMER
-	objects = CustomerManager()
+
+	objects = UserManager()
+	active_objects = CustomerManager()
 
 	class Meta:
 		verbose_name = 'Customer'
