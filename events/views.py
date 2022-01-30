@@ -10,9 +10,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import (EventSerializer, CommentSerializer)
 from .models import (Event, Comments)
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 class EventViewSet(viewsets.ModelViewSet):
-    serializer_class = EventSerializer
-    queryset = Event.objects.all()
+	permission_classes = (IsAuthenticated,)
+	serializer_class = EventSerializer
+	queryset = Event.objects.all()
 
-    permission_classes = [IsAuthenticated]
+def store(request):
+	return render(request, 'store.html', {})

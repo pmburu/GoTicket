@@ -16,12 +16,35 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts import views
+from rest_framework_simplejwt import views as jwt_views
+
 
 urlpatterns = [
-	path('', views.home, name='home'),
-	path('about.html', views.about, name='about'),
+	# homepage
+	path('', include('home.urls')),
+
+	# admin
     path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('events/', include('events.urls')),
+
+	# auth
+	path('auth/', include('djoser.urls')),
+	path('events/', include('events.urls')),
+	path('api-auth/', include('rest_framework.urls')),
+
+	# accounts
+    path('store/', views.store , name='store'),
+	path('login.html', views.login, name='login'),
+	path('sign_up.html', views.signup, name='signup'),
+	path('profiles.html', views.profile, name='profile'),
+
+	# jwt
+	path('auth/jwt/create',
+         jwt_views.TokenObtainPairView.as_view(),
+         name ='token_obtain_pair'),
+    path('auth/jwt/refresh',
+         jwt_views.TokenRefreshView.as_view(),
+         name ='token_refresh'),
+	path('auth/jwt/verify/',
+		jwt_views.TokenVerifyView.as_view(),
+		name='token_verify'),
 ]
