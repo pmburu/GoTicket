@@ -17,20 +17,25 @@ from .forms import (
 
 @admin.register(Manager)
 class ManagerAdmin(UserAdmin):
+    fieldsets = (
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {'fields': ('groups',)}),
+        (_('User Type'), {'fields': ('user_type',)}),
+        (_('Access Credentials'), {'fields': ('username', 'password')}),
+    )
     search_fields = ('username__startswith',)
     list_display = [
         'username',
         'email',
         'last_name',
-        'is_staff',
+        'user_type',
         'is_active',
+        'last_login'
     ]
     list_per_page = 25
 
 @admin.register(Customer)
-class CustomerAdmin(UserAdmin, admin.ModelAdmin):
-    add_form = CustomerCreationForm
-    form = CustomerChangeForm
+class CustomerAdmin(UserAdmin):
     fieldsets = (
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
         (_('Permissions'), {'fields': ('groups',)}),
@@ -39,8 +44,6 @@ class CustomerAdmin(UserAdmin, admin.ModelAdmin):
     )
     readonly_fields = ['user_type']
     search_fields = ('username__startswith',)
-    list_filters = ()
-    date_hierachy = ('date_joined',)
     list_display = [
         'username',
         'email',
