@@ -15,9 +15,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 class EventViewSet(viewsets.ModelViewSet):
-	permission_classes = (IsAuthenticated,)
-	serializer_class = EventSerializer
-	queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    # permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        me = self.request.user
+
+        return Event.objects.filter(manager=me)
 
 def store(request):
 	return render(request, 'store.html', {})
