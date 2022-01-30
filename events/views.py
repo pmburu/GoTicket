@@ -13,6 +13,9 @@ from .models import (Event, Comments)
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    queryset = Event.objects.all()
+    permission_classes = (IsAuthenticated,)
 
-    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        me = self.request.user
+
+        return Event.objects.filter(manager=me)
