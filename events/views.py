@@ -16,7 +16,7 @@ from rest_framework.response import Response
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         me = self.request.user
