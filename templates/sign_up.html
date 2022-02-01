@@ -7,12 +7,6 @@
 				{% csrf_token %}
 				<h4 class="mb-5 text-secondary">Create Your Account</h4>
 				<div class="row">
-					<div class="form-check">
-						<input id="event_manager" class="form-check-input" type="checkbox" value="">
-						<label class="form-check-label" for="flexCheckDefault">
-							Are you an Event Manager
-						</label>
-					</div>
 					<div class="mb-3 col-md-6">
 						<label>First Name<span class="text-danger">*</span></label>
 						<input id="username" type="text" name="fname" class="form-control" placeholder="Username">
@@ -41,6 +35,10 @@
 						<label>Confirm Password<span class="text-danger">*</span></label>
 						<input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
 					</div>
+					<select id="user_select_type" class="form-select">
+						<option value="CUSTOMER" selected>Customer</option>
+						<option value="EVENT MANAGER">Event Manager</option>
+					</select>
 					<div class="col-md-12">
 						<button type="submit" class="btn btn-dark btn-primary float-end">Sign-Up</button>
 					</div>
@@ -57,11 +55,6 @@
 	$(document).ready(function(){
 			$("#signupform").on('submit', function(e){
 					event.preventDefault();
-
-					console.log($('#event_manager').attr('checked'));
-					console.log($('input[name="flexCheckDefault"]:checked').val());
-					console.log($('#event_manager').is(':checked').checked);
-
 					$.ajax({
 							url: 'auth/users/',
 							type: "POST",
@@ -71,12 +64,11 @@
 									'first_name': $('#first_name').val().trim(),
 									'last_name': $('#last_name').val().trim(),
 									'email': $('#email').val().trim(),
-									'user_type': $('#user_type').val().trim(),
+									'user_type': $('#user_select_type').val().trim(),
 								}),
 							dataType: "json",
 							cache: false,
 							processData: false,
-							contentType: false,
 							contentType: "application/json; charset=UTF-8",
 							success: function (data) {
 									console.log('IT WORKED');
