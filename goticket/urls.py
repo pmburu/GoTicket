@@ -47,4 +47,7 @@ urlpatterns = [
 	path('auth/jwt/verify/',
 		jwt_views.TokenVerifyView.as_view(),
 		name='token_verify'),
+
+    # cart & checkout
+    path('cart/', include('tickets.urls')),
 ]

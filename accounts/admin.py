@@ -12,7 +12,7 @@ from django.contrib.auth.forms import (
 from .managers import UserTypes
 from .models import (
     User, Manager, Customer,
-    Favorites, Tickets_sold
+    Favorites
 )
 from events.models import Event, Attendance
 
@@ -137,7 +137,6 @@ class CustomUserAdmin(UserAdmin):
     #     return form
 
 admin.site.register(Favorites)
-admin.site.register(Tickets_sold)
 
 
 # class StaffAdmin(UserAdmin):

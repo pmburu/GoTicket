@@ -83,15 +83,6 @@ class Customer(User):
 		verbose_name_plural = 'Customers'
 		proxy = True
 
-class Tickets_sold(models.Model):
-
-	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	total = models.IntegerField()
-
-	class Meta:
-		verbose_name = 'Tickets_sold'
-		verbose_name_plural = 'Tickets_sold'
-
 class Favorites(models.Model):
 
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

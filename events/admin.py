@@ -6,13 +6,17 @@ from .models import Event, Attendance, Comments
 class EventAdmin(admin.ModelAdmin):
     ordering = ['date_created']
     search_fields = ['name']
-    readonly_fields = ['tickets_sold']
 
-    # Filter only the events created by this manager
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        me = request.user.pk
-        return qs.filter(manager=me)
+
+        # Filter only the events created by this manager
+        if not request.user.is_superuser:
+            me = request.user.pk
+            return qs.filter(manager=me)
+
+        # Else show all events to superuser
+        return qs
 
     # Functions to autoselect current logged in manager during event creation
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
