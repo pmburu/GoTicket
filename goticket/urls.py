@@ -28,6 +28,7 @@ urlpatterns = [
 
 	# auth
 	path('auth/', include('djoser.urls')),
+	path('auth/users/', include('djoser.urls'), name='create_account'),
 	path('events/', include('events.urls')),
 	path('api-auth/', include('rest_framework.urls')),
 
