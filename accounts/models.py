@@ -1,8 +1,10 @@
 import uuid
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import AbstractUser, UserManager, Group
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_save
 
 # Import custom manager classes
 from .managers import (
@@ -21,7 +23,7 @@ For reference see:
 class User(AbstractUser):
 
 	# Default user type --> invoked upon registration and updated on choices
-	base_type = UserTypes.CUSTOMER
+	base_type = 'Super Admin'
 
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	user_type = models.CharField(
@@ -41,8 +43,8 @@ class User(AbstractUser):
 		return super().save(*args, **kwargs)
 
 	class Meta:
-		verbose_name = 'User'
-		verbose_name_plural = 'Users'
+		verbose_name = 'System Admin'
+		verbose_name_plural = 'System Admins'
 
 class EventManagerDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='event_manager_details')
@@ -51,6 +53,7 @@ class EventManagerDetails(models.Model):
 class Manager(User):
 
 	base_type = UserTypes.EVENT_MANAGER
+	is_staff = True
 	objects = UserManager() # Default user manager
 	active_objects = EventManagerManager() # Custom manager
 
@@ -98,6 +101,25 @@ class Favorites(models.Model):
 	class Meta:
 		verbose_name = 'Favorite'
 		verbose_name_plural = 'Favorites'
+
+'''
+Creating pre-save signals to set manager as staff status in Django user
+'''
+
+@receiver(pre_save, sender=User)
+def manager_to_staff_status(sender, instance, **kwargs):
+    if instance is not None and instance.user_type == UserTypes.EVENT_MANAGER:
+	    instance.is_staff = True
+
+'''
+Signal for adding event manager to event managers group - has all permissions
+'''
+
+@receiver(post_save, sender=User)
+def add_to_group(sender, instance, created, **kwargs):
+	if created and instance.user_type == UserTypes.EVENT_MANAGER:
+		event_managers_group = Group.objects.get(name='Event Managers')
+		instance.groups.add(event_managers_group)
 
 '''
 More about proxy models can be found here:

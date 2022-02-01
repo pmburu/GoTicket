@@ -35,6 +35,9 @@ class EventSerializer(serializers.ModelSerializer):
             'tickets_sold'
         )
 
+        read_only_fields = ('tickets_sold',)
+
+
 class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
